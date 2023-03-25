@@ -1,5 +1,11 @@
 # How to Use Chatbot
 
+## Creating the Environment
+
+Navigate to this repo's directory and use the shell command `conda env create -f env-chatbot_env.yaml` to create the environment. 
+Next, use `$ ca chatbot_env` to activate the environment in the current shell window
+Next, use `$ pip install pip install chatterbot==1.0.4 pytz` to install chatterbot and all of its dependencies to the environment
+
 ## Running Chatbot
 
 To run the chatbot, navigate to the directory of the `chatbot.py` file, and use the shell command `$ python chatbot.py`
