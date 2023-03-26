@@ -3,5 +3,10 @@
         {
             "filename": "phq-9.json",
             "topic": "depression"
+        },
+    "GAD-7":
+        {
+            "filename": "gad-7.json",
+            "topic": "anxiety"
         }
 }
