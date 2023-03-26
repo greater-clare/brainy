@@ -8,5 +8,10 @@
         {
             "filename": "gad-7.json",
             "topic": "anxiety"
+        },
+    "ASRS-5":
+        {
+            "filename": "asrs-5.json",
+            "topic": "adhd"
         }
 }
