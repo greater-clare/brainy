@@ -13,5 +13,10 @@
         {
             "filename": "asrs-5.json",
             "topic": "adhd"
+        },
+    "ZF-OCS":
+        {
+            "filename": "zf-ocs.json",
+            "topic": "ocd"
         }
 }
