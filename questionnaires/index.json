@@ -18,5 +18,10 @@
         {
             "filename": "zf-ocs.json",
             "topic": "ocd"
+        },
+    "PC-PTSD":
+        {
+            "filename": "pc-ptsd",
+            "topic": "ptsd"
         }
 }
