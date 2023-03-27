@@ -32,6 +32,7 @@ Again, ensure that the current working directory is the same as the repository, 
 List Trainer: [####################] 100%
 > 
 ```
+
 The last line of the above output, "> " is the chatbot's prompt where you can enter text and begin the conversation. When you would like to exit the conversation, simply type ":q", "quit", or "exit".
 
 ## Other
