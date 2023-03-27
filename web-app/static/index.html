@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chatbot</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <script src="https://kit.fontawesome.com/e0cdde947d.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="message-box-outer">
+        <div id="message-box"></div>
+        <form id="message-form">
+            <input id="message-input" type="text" placeholder="Type your message here...">
+            <button type="submit"><i class="fas fa-paper-plane"></i></button>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="static/js/chat.js"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+        body {
+            background: linear-gradient(to bottom right, #94e1ff, #f7ff96);
+            font-family: 'Nunito', sans-serif;
+            background-size: 100%;
+        }
+
+        #message-box-outer{
+            background-color: #f7f7f7;
+            border: 1px solid #ccc;
+            margin: 40px auto;
+            border-radius: 20px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            width: 80%;
+        }
+
+        #message-box {
+            overflow-y: scroll;
+            padding: 0 40px;
+            height: 500px;
+        }
+
+        #message-box p {
+            background-color: pink;
+            margin-bottom: 10px;
+            border-radius: 20px;
+        }
+
+        #message-form {
+            margin: 10px auto;
+            width: 90%;
+            display: flex;
+        }
+        
+        #message-input {
+            width: 100%;
+            font-size: 16px;
+            padding: 10px;
+            border-radius: 10px;
+            margin-right: 10px;
+            border-color: #ccc;
+        }
+
+        #message-form button {
+            border-radius: 50%;
+            width: 50px; /* You can adjust the width and height to your desired size */
+            height: 50px;
+            color: white;
+            background-color: #239ecd;
+            border: none;
+        }
+        
+        #message-box .chatbot-message {
+            background-color: #239ecd;
+            color: white;
+            border-radius: 20px 20px 20px 0;
+            margin-bottom: 10px;
+            margin-right: 80px;
+            padding: 15px;
+            position: relative;
+            display: flex;
+            align-items: center; /* Align items to the bottom */
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        #message-box p.you {
+            background-color: #8c8c8c;
+            color: white;
+            margin-bottom: 10px;
+            border-radius: 20px 20px 0 20px;
+            margin-left: 80px;
+            padding: 10px 20px;
+            position: relative;
+            display: flex;
+            align-items: center; /* Align items to the bottom */
+            justify-content: flex-end;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            overflow-wrap: break-word;
+            
+        }
+
+        #message-box .chatbot-message img.circle-icon {
+            width: 40px;
+            height: 40px;
+            margin-right: 10px;
+            border-radius: 50%;
+        }
+
+#message-box .chatbot-message span {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#message-box .chatbot-message p {
+    margin: 5px 0 0 0;
+}
+
+#message-box .chatbot-message .message-time {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    font-size: 12px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+}
+
+#message-box .you-message {
+  text-align: right;
+}
+
+#message-box .you-message span {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#message-box .you-message p {
+    margin: 5px 0 0 0;
+}
+#message-box .you-div {
+    text-align: right;
+}
+
+#message-box .you-message .message-time {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    font-size: 12px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+}
+
+#message-box .labelText {
+    color: grey;
+    font-size: 14px;
+}
+
+#you-div {
+    text-align: right;
+}
+
+
+</style>
+</body>
+</html>
+
+
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            url: '/get_initial',
+            data: {query: ''},
+            type: 'GET',
+            success: function(response) {
+                var messageBox = $('#message-box');
+                messageBox.append('<p class="chatbot-message"><img class="circle-icon" src="static/images/DALL·E 2023-03-25 16.05.24.png"><span class="chatbot-text">' + response.response + '</span></p><span class="labelText">Brainy</span>');
+                messageBox.scrollTop(messageBox.prop("scrollHeight"));
+            }
+        });
+    
+        $('#message-form').on('submit', function(event) {
+            event.preventDefault();
+            var message = $('#message-input').val();
+            $('#message-input').val('');
+            $.ajax({
+                url: '/get_response',
+                data: {query: message},
+                type: 'GET',
+                success: function(response) {
+                    var messageBox = $('#message-box');
+                    messageBox.append('<div id="you-div"><p class="you">' + message + '</p><span class="labelText">You</span></div>');
+                    messageBox.append('<p class="chatbot-message"><img class="circle-icon" src="static/images/DALL·E 2023-03-25 16.05.24.png"><span class="chatbot-text">' + response.response + '</span></p><span class="labelText">Brainy</span>');
+                    messageBox.scrollTop(messageBox.prop("scrollHeight"));
+                }
+            });
+        });
+    });
+</script>
