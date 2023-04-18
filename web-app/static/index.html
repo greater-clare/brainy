@@ -1,114 +1,124 @@
 <!DOCTYPE html>
 <html>
-<head>
+    <head>
     <title>Chatbot</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-    <script src="https://kit.fontawesome.com/e0cdde947d.js" crossorigin="anonymous"></script>
-</head>
-<body>
-    <div id="message-box-outer">
-        <div id="message-box"></div>
-        <form id="message-form">
-            <input id="message-input" type="text" placeholder="Type your message here...">
-            <button type="submit"><i class="fas fa-paper-plane"></i></button>
-        </form>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="static/js/chat.js"></script>
-    
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
-        body {
-            background: linear-gradient(to bottom right, #94e1ff, #f7ff96);
-            font-family: 'Nunito', sans-serif;
-            background-size: 100%;
-        }
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div id="message-box-outer">
+            <div id="message-box"></div>
+            <form id="message-form">
+                <input id="message-input" type="text" placeholder="Type your message here...">
+                <button type="submit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-send-fill" viewBox="0 0 16 16">
+                    <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083l6-15Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z"/>
+                  </svg></button>
+            </form>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="static/js/chat.js"></script>
+    </body>
+</html>
 
-        #message-box-outer{
-            background-color: #f7f7f7;
-            border: 1px solid #ccc;
-            margin: 40px auto;
-            border-radius: 20px;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-            width: 80%;
-        }
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+html {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(to bottom right, #94e1ff, #f7ff96);
+    display: table;
+    margin: auto;
+}
 
-        #message-box {
-            overflow-y: scroll;
-            padding: 0 40px;
-            height: 500px;
-        }
+body {
+    font-family: 'Nunito', sans-serif;
+    display: table-cell;
+    vertical-align: middle;
+    height: 80%;
+}
 
-        #message-box p {
-            background-color: pink;
-            margin-bottom: 10px;
-            border-radius: 20px;
-        }
+#message-box-outer{
+    background-color: #f7f7f7;
+    border: 2px solid #ccc;
+    border-radius: 20px;
+    margin: auto;
+    vertical-align: middle;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    width: 80%;
+    max-width: 80%;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+}
 
-        #message-form {
-            margin: 10px auto;
-            width: 90%;
-            display: flex;
-        }
-        
-        #message-input {
-            width: 100%;
-            font-size: 16px;
-            padding: 10px;
-            border-radius: 10px;
-            margin-right: 10px;
-            border-color: #ccc;
-        }
+#message-box {
+    overflow-y: scroll;
+    height: auto;
+    margin: 0.5em;
+    padding: 0em 1.5em;
+    height: 500px;
+}
 
-        #message-form button {
-            border-radius: 50%;
-            width: 50px; /* You can adjust the width and height to your desired size */
-            height: 50px;
-            color: white;
-            background-color: #239ecd;
-            border: none;
-        }
-        
-        #message-box .chatbot-message {
-            background-color: #239ecd;
-            color: white;
-            border-radius: 20px 20px 20px 0;
-            margin-bottom: 10px;
-            margin-right: 80px;
-            padding: 15px;
-            position: relative;
-            display: flex;
-            align-items: center; /* Align items to the bottom */
-            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
+#message-form {
+    margin: 1em auto;
+    width: 90%;
+    height: 50px;
+    display: flex;
+}
 
-        #message-box p.you {
-            background-color: #8c8c8c;
-            color: white;
-            margin-bottom: 10px;
-            border-radius: 20px 20px 0 20px;
-            margin-left: 80px;
-            padding: 10px 20px;
-            position: relative;
-            display: flex;
-            align-items: center; /* Align items to the bottom */
-            justify-content: flex-end;
-            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-            overflow-wrap: break-word;
-            
-        }
+#message-input {
+    width: 100%;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 10px;
+    margin-right: 10px;
+    border-color: #ccc;
+}
 
-        #message-box .chatbot-message img.circle-icon {
-            width: 40px;
-            height: 40px;
-            margin-right: 10px;
-            border-radius: 50%;
-        }
+#message-form button {
+    border-radius: 50%;
+    width: 60px; /* You can adjust the width and height to your desired size */
+    height: 50px;
+    color: white;
+    background-color: #239ecd;
+    border: none;
+}
+
+#message-box .chatbot-message {
+    background-color: #239ecd;
+    color: white;
+    border-radius: 20px 20px 20px 0;
+    margin-bottom: 10px;
+    margin-right: 80px;
+    padding: 15px;
+    position: relative;
+    display: flex;
+    align-items: center; /* Align items to the bottom */
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+#message-box p.you {
+    background-color: #8c8c8c;
+    color: white;
+    margin-bottom: 10px;
+    border-radius: 20px 20px 0 20px;
+    margin-left: 80px;
+    padding: 10px 20px;
+    position: relative;
+    display: flex;
+    align-items: center; /* Align items to the bottom */
+    justify-content: flex-end;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    overflow-wrap: break-word;
+}
+
+#message-box .chatbot-message img.circle-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
 
 #message-box .chatbot-message span {
-    font-size: 18px;
+    font-size: 14px;
     font-weight: bold;
 }
 
@@ -158,12 +168,7 @@
 #you-div {
     text-align: right;
 }
-
-
 </style>
-</body>
-</html>
-
 
 <script>
     $(document).ready(function() {
@@ -173,7 +178,7 @@
             type: 'GET',
             success: function(response) {
                 var messageBox = $('#message-box');
-                messageBox.append('<p class="chatbot-message"><img class="circle-icon" src="static/images/DALL·E 2023-03-25 16.05.24.png"><span class="chatbot-text">' + response.response + '</span></p><span class="labelText">Brainy</span>');
+                messageBox.append('<p class="chatbot-message"><img class="circle-icon" src="static/images/mascot_fc7a89.jpg"><span class="chatbot-text">' + response.response + '</span></p><span class="labelText">Brainy</span>');
                 messageBox.scrollTop(messageBox.prop("scrollHeight"));
             }
         });
@@ -189,7 +194,7 @@
                 success: function(response) {
                     var messageBox = $('#message-box');
                     messageBox.append('<div id="you-div"><p class="you">' + message + '</p><span class="labelText">You</span></div>');
-                    messageBox.append('<p class="chatbot-message"><img class="circle-icon" src="static/images/DALL·E 2023-03-25 16.05.24.png"><span class="chatbot-text">' + response.response + '</span></p><span class="labelText">Brainy</span>');
+                    messageBox.append('<p class="chatbot-message"><img class="circle-icon" src="static/images/mascot_fc7a89.jpg"><span class="chatbot-text">' + response.response + '</span></p><span class="labelText">Brainy</span>');
                     messageBox.scrollTop(messageBox.prop("scrollHeight"));
                 }
             });
