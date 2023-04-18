@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <div id="message-box-outer">
+        <div id="ui-panel">
             <div id="message-box"></div>
             <form id="message-form">
                 <input id="message-input" type="text" placeholder="Type your message here...">
@@ -36,7 +36,7 @@ body {
     height: 80%;
 }
 
-#message-box-outer{
+#ui-panel{
     background-color: #f7f7f7;
     border: 2px solid #ccc;
     border-radius: 20px;
@@ -45,7 +45,7 @@ body {
     word-wrap: break-word;
     overflow-wrap: break-word;
     width: 80%;
-    max-width: 80%;
+    max-width: 40em;
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -64,15 +64,6 @@ body {
     display: flex;
 }
 
-#message-input {
-    width: 100%;
-    font-size: 16px;
-    padding: 10px;
-    border-radius: 10px;
-    margin-right: 10px;
-    border-color: #ccc;
-}
-
 #message-form button {
     border-radius: 50%;
     width: 60px; /* You can adjust the width and height to your desired size */
@@ -80,6 +71,15 @@ body {
     color: white;
     background-color: #239ecd;
     border: none;
+}
+
+#message-input {
+    width: 100%;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 10px;
+    margin-right: 10px;
+    border-color: #ccc;
 }
 
 #message-box .chatbot-message {
@@ -172,30 +172,38 @@ body {
 
 <script>
     $(document).ready(function() {
+        
+        var messageBox = $('#message-box');
+
+        function brainyMessage(message) {
+            messageBox.append('<p class="chatbot-message"><img class="circle-icon" src="static/images/mascot_fc7a89.jpg"><span class="chatbot-text">'+message+'</span></p><span class="labelText">Brainy</span></div>');
+            messageBox.scrollTop(messageBox.prop("scrollHeight"));
+        }
+
+        function userMessage(message) {
+            messageBox.append('<div id="you-div"><p class="you">'+message+'</p><span class="labelText">You</span></div>');
+        }
+
         $.ajax({
             url: '/get_initial',
             data: {query: ''},
             type: 'GET',
             success: function(response) {
-                var messageBox = $('#message-box');
-                messageBox.append('<p class="chatbot-message"><img class="circle-icon" src="static/images/mascot_fc7a89.jpg"><span class="chatbot-text">' + response.response + '</span></p><span class="labelText">Brainy</span>');
-                messageBox.scrollTop(messageBox.prop("scrollHeight"));
+                brainyMessage(response.response);
             }
         });
     
         $('#message-form').on('submit', function(event) {
             event.preventDefault();
             var message = $('#message-input').val();
+            userMessage(message);
             $('#message-input').val('');
             $.ajax({
                 url: '/get_response',
-                data: {query: message},
+                data: {"message": message},
                 type: 'GET',
                 success: function(response) {
-                    var messageBox = $('#message-box');
-                    messageBox.append('<div id="you-div"><p class="you">' + message + '</p><span class="labelText">You</span></div>');
-                    messageBox.append('<p class="chatbot-message"><img class="circle-icon" src="static/images/mascot_fc7a89.jpg"><span class="chatbot-text">' + response.response + '</span></p><span class="labelText">Brainy</span>');
-                    messageBox.scrollTop(messageBox.prop("scrollHeight"));
+                    brainyMessage(response.response);
                 }
             });
         });
