@@ -1,0 +1,3 @@
+[submodule "Hugging Face Web App"]
+    path = web-app
+    url = https://huggingface.co/spaces/bird-watching-society-of-greater-clare/brainy

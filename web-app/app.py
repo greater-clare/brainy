@@ -1,16 +1,17 @@
+from datetime import datetime, timedelta
 from flask import Flask, request, jsonify, make_response
 from flask_cors import CORS
-from datetime import datetime, timedelta
-import time
-from dotenv import load_dotenv
-import os
 import openai
+import os
 
-load_dotenv()
+#### SET UP ENVIRONMENT
 openai.api_key = os.getenv("OPENAI_API_KEY")
+counter = 0
 
 app = Flask(__name__)
 CORS(app)
+
+### RESPONSE FUNCTIONS
 
 def generate_response(prompt):
     completions = openai.Completion.create(
@@ -23,6 +24,8 @@ def generate_response(prompt):
     )
     message = completions.choices[0].text.strip()
     return message
+
+### INIT WEB APP
 
 @app.route("/")
 def index():
@@ -47,4 +50,4 @@ def get_response():
     return jsonify({"response": response})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()

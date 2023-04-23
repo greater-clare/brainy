@@ -1,0 +1,4 @@
+flask
+flask_CORS
+datetime
+openai
